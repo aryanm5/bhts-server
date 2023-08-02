@@ -1,0 +1,9 @@
+{
+  "name": "bhts-server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/TeamRubberDuckies/server.git",
+  "author": "Aryan Mittal",
+  "license": "MIT",
+  "private": true
+}
