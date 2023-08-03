@@ -5,6 +5,9 @@
 Aryan Mittal and Kelechukwu Nwaiwu
 
 ## API Structure
+API is hosted at https://api.mittaldev.com/bhts-dev/*endpoint*
+
+An API passcode is required for all endpoints.
 
 Endpoints:
 | Endpoint | Type | Description | Requires |
