@@ -4,26 +4,27 @@ import { parseRequest, success, error } from '../helpers/general.js';
 export const handler = async evt => {
     let req = parseRequest(evt);
 
-    // check password
+    // check API password
     if (req.pass !== process.env.PASS) {
-        return error('Incorrect password.', 401);
+        return error('Incorrect API password.', 401);
     }
 
     // input validation
-    if (req.username.length < 3) { return error('username must be at least 3 characters.', 400); }
+    if (req.user.username.length < 3) { return error('username must be at least 3 characters.', 400); }
 
-    if (req.password.length < 5) { return error('password must be at least 5 characters.', 400); }
+    if (req.user.password.length < 5) { return error('password must be at least 5 characters.', 400); }
 
-    if (req.firstName.length === 0) { return error('please include a firstName.', 400); }
+    if (req.user.firstName.length === 0) { return error('please include a firstName.', 400); }
 
-    if (req.lastName.length === 0) { return error('please include a lastName.', 400); }
+    if (req.user.lastName.length === 0) { return error('please include a lastName.', 400); }
 
+    // Create user row in database
     try {
         await put({
-            username: req.username,
-            password: req.password,
-            firstName: req.firstName,
-            lastName: req.lastName,
+            username: req.user.username,
+            password: req.user.password,
+            firstName: req.user.firstName,
+            lastName: req.user.lastName,
             income: 0,
             transactions: [],
         });
@@ -37,6 +38,7 @@ export const handler = async evt => {
         return error('createUser failed.');
     }
 
+    // scan all user data
     let users;
     try {
         users = await scan();
