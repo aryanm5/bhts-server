@@ -15,6 +15,21 @@ Endpoints:
 | ```addTransaction``` | ```POST``` | Add a user's purchase. | ```username```<br />```password```<br />```transaction``` |
 | ```deleteTransaction``` | ```POST``` | Delete a user's purchase. | ```username```<br />```password```<br />```transactionId``` |
 
+## Sample Requests
+
+createUser:
+```
+{
+    "pass": "*API PASS*",
+    "user": {
+        "username": "*...*",
+        "password": "*...*",
+        "firstName": "*...*",
+        "lastName": "*...*"
+    }
+}
+```
+
 ## Database Structure
 
 User row:
