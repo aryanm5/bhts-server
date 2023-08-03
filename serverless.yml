@@ -54,6 +54,12 @@ functions:
       - httpApi:
           path: /login
           method: post
+  updateBudget:
+    handler: src/handlers/updateBudget.handler
+    events:
+      - httpApi:
+          path: /updateBudget
+          method: post
 
 resources:
   Resources:

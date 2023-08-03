@@ -25,7 +25,7 @@ export const handler = async evt => {
             password: req.user.password,
             firstName: req.user.firstName,
             lastName: req.user.lastName,
-            income: 0,
+            budget: 0,
             transactions: [],
         });
     } catch (err) {
