@@ -9,7 +9,7 @@ Endpoints:
 | --- | --- | --- |
 | ```ping``` | ```POST``` | Returns the input |
 | ```createUser``` | ```POST``` | Create a user. Requires ```username```, ```password```, ```firstName```, ```lastName``` |
-| ```login``` | ```POST``` | Login as a user. Requires ```username```, ```password```. Returns all users' data. |
+| ```login``` | ```POST``` | Login as a user. Also works to refresh user data. Requires ```username```, ```password```. Returns all users' data. |
 | ```updateIncome``` | ```POST``` | Update a user's total income. Requires ```username```, ```password```, ```income``` |
 | ```updateName``` | ```POST``` | Update a user's first and last name. Requires ```username```, ```password```, ```firstName```, ```lastName``` |
 | ```addTransaction``` | ```POST``` | Add a user's purchase. Requires ```username```, ```password```, ```transaction``` |
