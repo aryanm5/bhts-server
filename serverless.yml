@@ -66,6 +66,12 @@ functions:
       - httpApi:
           path: /updateName
           method: post
+  addTransaction:
+    handler: src/handlers/addTransaction.handler
+    events:
+      - httpApi:
+          path: /addTransaction
+          method: post
 
 resources:
   Resources:

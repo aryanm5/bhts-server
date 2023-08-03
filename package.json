@@ -17,5 +17,8 @@
     "serverless-domain-manager": "^7.1.1",
     "serverless-esbuild": "^1.46.0",
     "serverless-stage-manager": "^1.0.5"
+  },
+  "dependencies": {
+    "short-uuid": "^4.2.2"
   }
 }
