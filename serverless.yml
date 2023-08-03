@@ -18,6 +18,7 @@ provider:
   environment:
     AWS_NODEJS_CONNECTION_REUSE_ENABLED: 1
     STAGE: ${self:provider.stage}
+    PASS: ${self:custom.env.pass}
 
   iam:
     role:
@@ -40,6 +41,12 @@ functions:
     events:
       - httpApi:
           path: /ping
+          method: post
+  createUser:
+    handler: src/handlers/createUser.handler
+    events:
+      - httpApi:
+          path: /createUser
           method: post
 
 resources:
