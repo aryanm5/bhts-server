@@ -48,6 +48,12 @@ functions:
       - httpApi:
           path: /createUser
           method: post
+  login:
+    handler: src/handlers/login.handler
+    events:
+      - httpApi:
+          path: /login
+          method: post
 
 resources:
   Resources:
