@@ -29,6 +29,11 @@ export const handler = async evt => {
         });
     } catch (err) {
         console.error(`ERROR while creating user: ${err.name}: ${err.message}`);
+
+        if (err.name === 'ConditionalCheckFailedException') {
+            return error('That username is already in use.');
+        }
+        
         return error('createUser failed.');
     }
 
