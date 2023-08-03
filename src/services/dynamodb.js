@@ -9,7 +9,8 @@ const table = process.env.STAGE === 'prod' ? 'bhts-users' : 'bhts-dev-users';
 const put = async info => {
     const command = new PutCommand({
         TableName: table,
-        Item: info
+        Item: info,
+        ConditionExpression: 'attribute_not_exists(username)',
     });
 
     await docClient.send(command);
