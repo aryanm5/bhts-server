@@ -13,6 +13,7 @@ Endpoints:
 | ```updateBudget``` | ```POST``` | Update a user's total budget. Returns updated user. | ```username```<br />```password```<br />```budget``` |
 | ```updateName``` | ```POST``` | Update a user's first and last name. Returns updated user. | ```username```<br />```password```<br />```firstName```<br />```lastName``` |
 | ```addTransaction``` | ```POST``` | Add a user's purchase. | ```username```<br />```password```<br />```transaction``` |
+| ```deleteTransaction``` | ```POST``` | Delete a user's purchase. | ```username```<br />```password```<br />```transactionId``` |
 
 ## Database Structure
 
