@@ -1,10 +1,80 @@
 service: bhts-server
 frameworkVersion: '3'
 
+plugins:
+  - serverless-stage-manager
+  - serverless-domain-manager
+  - serverless-esbuild
+
 provider:
   name: aws
   runtime: nodejs18.x
+  architecture: arm64
+  deploymentMethod: direct
+  httpApi:
+    disableDefaultEndpoint: true
+    cors: true
+  stage: ${opt:stage, 'dev'}
+  timeout: 10
+  environment:
+    AWS_NODEJS_CONNECTION_REUSE_ENABLED: 1
+    STAGE: ${self:provider.stage}
 
-functions:
-  function1:
-    handler: index.handler
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - dynamodb:*
+            - cloudwatch:*
+          Resource: '*'
+
+package:
+  individually: true
+# patterns: # include/exclude these in package
+#   - '!env/**'
+#   - '!src/handlers/**'
+
+functions:      
+  ping:
+    handler: src/handlers/ping.handler
+    events:
+      - httpApi:
+          path: /ping
+          method: post
+
+resources:
+  Resources:
+    usersTable:
+          Type: AWS::DynamoDB::Table
+          Properties:
+            TableName: ${self:custom.env.usersTableName}
+            AttributeDefinitions:
+              - AttributeName: username
+                AttributeType: S
+            KeySchema:
+              - AttributeName: username
+                KeyType: HASH
+            BillingMode: PAY_PER_REQUEST
+
+
+custom:
+  esbuild:
+    minify: true
+    packager: yarn
+    exclude:
+      - '@aws-sdk/lib-dynamodb'
+      - '@aws-sdk/client-dynamodb'
+  stages:
+    - dev
+    - prod
+  env: ${file(env/${self:provider.stage}.yml)}
+  customDomain:
+    domainName: api.mittaldev.com
+    basePath: ${self:custom.env.basePath}
+    certificateName: '*.mittaldev.com'
+    createRoute53Record: true
+    endpointType: 'regional'
+    securityPolicy: tls_1_2
+    autoDomain: false
+    apiType: http
