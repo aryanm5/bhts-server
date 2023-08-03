@@ -60,6 +60,12 @@ functions:
       - httpApi:
           path: /updateBudget
           method: post
+  updateName:
+    handler: src/handlers/updateName.handler
+    events:
+      - httpApi:
+          path: /updateName
+          method: post
 
 resources:
   Resources:

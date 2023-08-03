@@ -10,13 +10,13 @@ export const handler = async evt => {
     }
 
     // input validation
-    if (req.user.username.length < 3) { return error('username must be at least 3 characters.', 400); }
+    if (req.user.username === undefined || req.user.username.length < 3) { return error('username must be at least 3 characters.', 400); }
 
-    if (req.user.password.length < 5) { return error('password must be at least 5 characters.', 400); }
+    if (req.user.password === undefined || req.user.password.length < 5) { return error('password must be at least 5 characters.', 400); }
 
-    if (req.user.firstName.length === 0) { return error('please include a firstName.', 400); }
+    if (req.user.firstName === undefined || req.user.firstName.length === 0) { return error('please include a firstName.', 400); }
 
-    if (req.user.lastName.length === 0) { return error('please include a lastName.', 400); }
+    if (req.user.lastName === undefined || req.user.lastName.length === 0) { return error('please include a lastName.', 400); }
 
     // Create user row in database
     try {
@@ -34,7 +34,7 @@ export const handler = async evt => {
         if (err.name === 'ConditionalCheckFailedException') {
             return error('That username is already in use.');
         }
-        
+
         return error('createUser failed.');
     }
 
