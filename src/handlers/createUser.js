@@ -41,7 +41,7 @@ export const handler = async evt => {
     // scan all user data
     let users;
     try {
-        users = await scan();
+        users = await scan(req.user.username);
     } catch (err) {
         console.error(`ERROR while scanning database: ${err.name}: ${err.message}`);
         return error('scan failed.');

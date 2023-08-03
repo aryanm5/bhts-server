@@ -92,14 +92,20 @@ const deleteItem = async username => {
     await docClient.send(command);
 };
 
-const scan = async () => {
+const scan = async username => {
     const command = new ScanCommand({
         TableName: table,
     });
 
     const scanData = (await docClient.send(command)).Items;
 
-    return scanData.map(({ password, ...item }) => item);
+    return scanData.map(item => {
+        if (item.username !== username) {
+            delete item.password;
+        }
+        
+        return item;
+    });
 };
 
 export { put, update, get, batchGet, deleteItem, scan };
